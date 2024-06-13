@@ -6,22 +6,25 @@ const prisma = new PrismaClient();
 
 
 const createCustomer = async (req: Request, res: Response) => {
-  const { name, email, phone,  createdAt, updatedAt, Sales }: CustomerDto = req.body;
+  const { name, email, phone}: CustomerDto = req.body;
 
   try {
     
     if ( !name || !email || ! phone ) {
       return res.status(400).json({ error: "Os campos name, email, phone precisam ser preenchidos" });
     }
+   const emailExist =  await prisma.customer.findFirst({ where: {email}})
+     if( emailExist){
+      return res.status(400).json({ error: "Este email já existe, favor inserir um novo" });
 
+     }
     const newCustomer = await prisma.customer.create({
       data: {
         name,
         email,
         phone,
-        createdAt,
-        updatedAt,
-        Sales
+        createdAt: new Date(), 
+        updatedAt: new Date()
       },
     });
     return res.status(201).json(newCustomer);
@@ -66,6 +69,34 @@ const showCustomer = async (req: Request, res: Response) => {
   }
 };
 
+const updateCustomer = async (req: Request, res: Response) =>{
+ try {
+  const { id } =req.params
+  const { name, email, phone }: CustomerDto = req.body;
 
+  const existId = await prisma.customer.findFirst({where:{ id: parseInt(id) }});
+  if(!existId){
+    return res.status(400).json({ error: "Este id: ${id} informado não foi encontrado" });
+  }
+  const emailExist =  await prisma.customer.findFirst({ where: {email}})
+     if(emailExist){
+      return res.status(400).json({ error: "Este email já existe, favor inserir um novo" });
+     }
+  const updateCustomer = await prisma.customer.update({
+    where: { id: parseInt(id) },
+    data:{
+      name,
+      email, 
+      phone,  
+      updatedAt: new Date()
+    }
+  })
+   return res.status(201).json(updateCustomer)
+ } catch (error) {
+  console.log(error);
+  
+  return res.status(500).json({message:'Error Server'})
+ }
+}
 
-export default  {createCustomer, showCustomerAll, showCustomer} 
+export default  {createCustomer, showCustomerAll, showCustomer, updateCustomer} 
