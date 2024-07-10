@@ -29,7 +29,6 @@ const createCustomer = async (req: Request, res: Response) => {
     });
     return res.status(201).json(newCustomer);
   } catch (error) {
-    console.error("Erro de servidor:", error);
     return res.status(500).json({ error: "Erro de servidor" });
   }
 };
