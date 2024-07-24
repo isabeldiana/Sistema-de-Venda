@@ -32,9 +32,6 @@ const createSales = async (req: Request, res: Response) => {
       priceTotal += products.price * quantity
      
 
-
-
-    console.log(priceTotal, "separa", totalSalePrice);
     }
     totalSalePrice += priceTotal
     const sale = await prisma.sale.create({
