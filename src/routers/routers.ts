@@ -1,8 +1,7 @@
 import { Router } from 'express';
 import costumer from '../controllers/customers/customer';
-
-import products from '../controllers/products';
-
+import products from '../controllers/products/products';
+import sales from '../controllers/sales/sales';
 const router = Router();
 
 //customers
@@ -16,4 +15,7 @@ router.put('/updateCustomer/:id', costumer.updateCustomer)
  router.put('/updateProduct/:id', products.updateProduct);
  router.put('/updateStock/:id', products.stockEntry);
 
+ // sales
+
+ router.post('/createSales', sales.createSales);
 export default router;
