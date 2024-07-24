@@ -9,7 +9,6 @@ const createCustomer = async (req: Request, res: Response) => {
   const { name, email, phone}: CustomerDto = req.body;
 
   try {
-    
     if ( !name || !email || ! phone ) {
       return res.status(400).json({ error: "Os campos name, email, phone precisam ser preenchidos" });
     }
