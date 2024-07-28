@@ -86,7 +86,22 @@ const createSales = async (req: Request, res: Response) => {
     return res.status(500).json({ message: 'Erro no servidor' });
   }
 }
+const  showSale = async (req: Request, res: Response) =>{
+  try {
+    const {id} = req.params
+    const sales = await prisma.sale.findMany()
+    if(!sales.length){
+      return res.status(404).json({message: 'Venda não encontrada'})
+    }
 
+    return res.json(sales)
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({message: 'Erro interno do servidor'})
+   
+
+  }
+}
 const  showSaleId = async (req: Request, res: Response) =>{
 
 
@@ -96,7 +111,6 @@ const  showSaleId = async (req: Request, res: Response) =>{
     if(!sales.length){
       return res.status(404).json({message: 'Venda não encontrada'})
     }
-
 
     return res.json(sales)
   } catch (error) {
@@ -109,5 +123,6 @@ const  showSaleId = async (req: Request, res: Response) =>{
 
 export default {
   createSales,
+  showSale,
   showSaleId
 };
