@@ -18,4 +18,5 @@ router.put('/updateCustomer/:id', costumer.updateCustomer)
  // sales
 
  router.post('/createSales', sales.createSales);
+ router.get('/showSaleId/:id', sales.showSaleId)
 export default router;

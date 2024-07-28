@@ -82,11 +82,35 @@ const createSales = async (req: Request, res: Response) => {
 
     return res.status(201).json(newCreatedInvoices);
   } catch (error) {
-    console.log(error);
+   
     return res.status(500).json({ message: 'Erro no servidor' });
+  }
+}
+
+const  showSaleId = async (req: Request, res: Response) =>{
+
+
+  try {
+    const {id} = req.params
+    const sales = await prisma.sale.findMany({where:{customerId: parseInt(id)}})
+    if(!id){
+      return res.status(404).json({message: 'Digite um id de cliente para encontrar'})
+    }
+    if(!sales){
+      return res.status(404).json({message: 'Cliente não encontrado, ou venda não existe venda para este cliente'})
+    }
+
+
+    return res.json(sales)
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({message: 'Erro interno do servidor'})
+   
+
   }
 }
 
 export default {
   createSales,
+  showSaleId
 };
