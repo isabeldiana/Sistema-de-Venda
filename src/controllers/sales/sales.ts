@@ -93,11 +93,8 @@ const  showSaleId = async (req: Request, res: Response) =>{
   try {
     const {id} = req.params
     const sales = await prisma.sale.findMany({where:{customerId: parseInt(id)}})
-    if(!id){
-      return res.status(404).json({message: 'Digite um id de cliente para encontrar'})
-    }
-    if(!sales){
-      return res.status(404).json({message: 'Cliente não encontrado, ou venda não existe venda para este cliente'})
+    if(!sales.length){
+      return res.status(404).json({message: 'Venda não encontrada'})
     }
 
 
