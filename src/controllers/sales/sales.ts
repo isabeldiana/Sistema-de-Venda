@@ -121,8 +121,37 @@ const  showSaleId = async (req: Request, res: Response) =>{
   }
 }
 
+
+const productBestSelling = async (req: Request, res: Response) => {
+  const bestSelling = await prisma.invoice.groupBy({
+    by: ['productId'],
+    _count: {
+      productId: true,
+    },
+    orderBy: {
+      _count: { productId: 'desc' },
+    },
+  })
+  const productsWithSales = await Promise.all(
+    bestSelling.map(async (item) => {
+      const product = await prisma.product.findUnique({
+        where: { id: item.productId },
+        select: { name: true}, 
+      });
+  
+      return {
+        productId: item.productId,
+        productName: product?.name,
+        quality: item._count.productId
+      };
+    })
+  );
+  
+  return res.status(200).json(productsWithSales)
+}
 export default {
   createSales,
   showSale,
-  showSaleId
+  showSaleId,
+  productBestSelling
 };
