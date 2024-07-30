@@ -87,8 +87,14 @@ const createdProduct =  async (req: Request, res: Response)=>{
   return res.status(500).json({message:'Error Server'})
   }
 }
+
+const showStok = async (req: Request, res: Response)=>{
+  const stock =  await prisma.product.findMany()
+ return res.status(200).json(stock)
+}
 export default {
   createdProduct,
   updateProduct,
-  stockEntry
+  stockEntry,
+  showStok
 }
