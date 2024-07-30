@@ -1,8 +1,7 @@
-import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
 import { invoiceDTO } from "./sales.dto";
+import prisma from "../../database/database";
 
-const prisma = new PrismaClient();
 
 const createSales = async (req: Request, res: Response) => {
   const { customerId, items }: { customerId: number; items: invoiceDTO[] } = req.body;

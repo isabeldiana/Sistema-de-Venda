@@ -1,8 +1,7 @@
-import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 import { CustomerDto } from './custumer.dto';
+import prisma from '../../database/database';
 
-const prisma = new PrismaClient();
 
 
 const createCustomer = async (req: Request, res: Response) => {

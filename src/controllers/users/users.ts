@@ -1,9 +1,8 @@
 import { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
 import { usersDto } from './users.dto';
 import * as bcrypt from 'bcrypt';
+import prisma from '../../database/database';
  
-const prisma = new PrismaClient();
 
 const createUser = async (req: Request, res: Response) =>{
  try {
