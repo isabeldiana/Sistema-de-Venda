@@ -5,7 +5,7 @@ import prisma from '../../database/database';
 
 
 const createCustomer = async (req: Request, res: Response) => {
-  const { name, email, phone}: CustomerDto = req.body;
+  const { name, email, phone, cpf, cnpj,adress}: CustomerDto = req.body;
 
   try {
     if ( !name || !email || ! phone ) {
@@ -16,11 +16,25 @@ const createCustomer = async (req: Request, res: Response) => {
       return res.status(400).json({ error: "Este email já existe, favor inserir um novo" });
 
      }
+     const cpfExist =  await prisma.customer.findFirst({ where: {cpf}})
+     if(cpfExist?.cpf === cpf){
+      return res.status(400).json({ error: "Este cpf já existe, favor inserir um novo" });
+     }
+
+     const cnpjExist =  await prisma.customer.findFirst({ where: {cnpj}})
+     console.log(cnpjExist);
+     
+     if(cnpjExist?.cnpj  === cnpj){
+      return res.status(400).json({ error: "Este cnpj já existe, favor inserir um novo" });
+     }
     const newCustomer = await prisma.customer.create({
       data: {
         name,
         email,
         phone,
+        cpf, 
+        cnpj,
+        adress,
         createdAt: new Date(), 
         updatedAt: new Date()
       },
@@ -69,7 +83,7 @@ const showCustomer = async (req: Request, res: Response) => {
 const updateCustomer = async (req: Request, res: Response) =>{
  try {
   const { id } =req.params
-  const { name, email, phone }: CustomerDto = req.body;
+  const { name, email, phone, cpf,  cnpj, adress, }: CustomerDto = req.body;
 
   const existId = await prisma.customer.findFirst({where:{ id: parseInt(id) }});
   if(!existId){
@@ -79,12 +93,27 @@ const updateCustomer = async (req: Request, res: Response) =>{
      if(emailExist){
       return res.status(400).json({ error: "Este email já existe, favor inserir um novo" });
      }
+
+     const cpfExist =  await prisma.customer.findFirst({ where: {cpf}})
+     if(cpfExist?.cpf === cpf){
+      return res.status(400).json({ error: "Este cpf já existe, favor inserir um novo" });
+     }
+
+     const cnpjExist =  await prisma.customer.findFirst({ where: {cnpj}})
+     console.log(cnpjExist);
+     
+     if(cnpjExist?.cnpj  === cnpj){
+      return res.status(400).json({ error: "Este cnpj já existe, favor inserir um novo" });
+     }
   const updateCustomer = await prisma.customer.update({
     where: { id: parseInt(id) },
     data:{
       name,
       email, 
       phone,  
+      cpf, 
+      cnpj,
+      adress,
       updatedAt: new Date()
     }
   })
