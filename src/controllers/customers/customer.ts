@@ -100,7 +100,7 @@ const updateCustomer = async (req: Request, res: Response) =>{
      }
 
      const cnpjExist =  await prisma.customer.findFirst({ where: {cnpj}})
-     console.log(cnpjExist);
+    
      
      if(cnpjExist?.cnpj  === cnpj){
       return res.status(400).json({ error: "Este cnpj já existe, favor inserir um novo" });
