@@ -47,7 +47,7 @@
  * /api/createCustomer:
  *   post:
  *     summary: Create a new customer
- *     tags: [Customer]
+ *     tags: [Customers]
  *     requestBody:
  *       required: true
  *       content:
@@ -126,7 +126,7 @@
  * /api/showCustomer/{id}:
  *   get:
  *     summary: Display a customer by ID
- *     tags: [Customer]
+ *     tags: [Customers]
  *     parameters:
  *       - in: path
  *         name: id
@@ -172,6 +172,138 @@
  *                   type: string
  *                   format: date-time
  *                   example: "2024-08-15T15:13:44.383Z"
+ *       404:
+ *         description: Customer not found
+ *       500:
+ *         description: Internal server error
+ */
+/**
+ * @swagger
+ * /api/showCustomer:
+ *   get:
+ *     summary: Display all customers
+ *     tags: [Customers]
+ *     responses:
+ *       200:
+ *         description: Successfully display all customers
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   example: 1
+ *                 name:
+ *                   type: string
+ *                   example: John Doe
+ *                 email:
+ *                   type: string
+ *                   example: johndoe@example.com
+ *                 phone:
+ *                   type: string
+ *                   example: "999999999"
+ *                 address:
+ *                   type: string
+ *                   example: "Rua das Flores, 000, São Paulo, SP, 00000-000, Brasil"
+ *                 cpf:
+ *                   type: string
+ *                   example: "999.999.999-00"
+ *                 cnpj:
+ *                   type: string
+ *                   example: "99.999.999/0001-00"
+ *                 createdAt:
+ *                   type: string
+ *                   format: date-time
+ *                   example: "2024-08-15T15:13:44.383Z"
+ *                 updatedAt:
+ *                   type: string
+ *                   format: date-time
+ *                   example: "2024-08-15T15:13:44.383Z"
+ *       404:
+ *         description: Customer not found
+ *       500:
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
+ * /api/updateCustomer/{id}:
+ *   put:
+ *     summary: Update a customer by ID
+ *     tags: [Customers]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *           example: 1
+ *         description: The customer ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: John Doe
+ *               email:
+ *                 type: string
+ *                 example: johndoe@example.com
+ *               phone:
+ *                 type: string
+ *                 example: "999999999"
+ *               address:
+ *                 type: string
+ *                 example: "Rua das Flores, 000, São Paulo, SP, 00000-000, Brasil"
+ *               cpf:
+ *                 type: string
+ *                 example: "999.999.999-00"
+ *                 nullable: true
+ *               cnpj:
+ *                 type: string
+ *                 example: "99.999.999/0001-00"
+ *                 nullable: true
+ *     responses:
+ *       200:
+ *         description: Customer updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   example: 1
+ *                 name:
+ *                   type: string
+ *                   example: John Doe
+ *                 email:
+ *                   type: string
+ *                   example: johndoe@example.com
+ *                 phone:
+ *                   type: string
+ *                   example: "999999999"
+ *                 address:
+ *                   type: string
+ *                   example: "Rua das Flores, 000, São Paulo, SP, 00000-000, Brasil"
+ *               cpf:
+ *                 type: string
+ *                 example: "999.999.999-00"
+ *                 nullable: true
+ *               cnpj:
+ *                 type: string
+ *                 example: "99.999.999/0001-00"
+ *                 nullable: true
+ *                 updatedAt:
+ *                   type: string
+ *                   format: date-time
+ *                   example: "2024-08-15T15:13:44.383Z"
+ *       400:
+ *         description: Invalid input
  *       404:
  *         description: Customer not found
  *       500:
