@@ -4,7 +4,7 @@ export class CustomerDto {
   phone?: string;
   cpf?:      string;
   cnpj?:     string;
-  adress?:   string;
+  address?:   string;
   createdAt?: Date;
   updatedAt?: Date;
 }

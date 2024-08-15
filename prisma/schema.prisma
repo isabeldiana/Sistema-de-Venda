@@ -14,7 +14,7 @@ model Customer {
   phone     String?
   cpf       String?   @unique
   cnpj      String?   @unique
-  adress    String?
+  address   String?
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   sales     Sale[]
