@@ -1,12 +1,15 @@
 require('dotenv').config();
 import express from 'express';
 import cors from 'cors';
-import Router from './routers/routers';
+import router from './routers/routers';
+import { setupSwagger } from './swagger/swagger';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use('/api', Router);
+app.use('/api', router);
 
-const PORT = process.env.PORT;
-app.listen(PORT);
+setupSwagger(app)
+
+
+app.listen(process.env.PORT);

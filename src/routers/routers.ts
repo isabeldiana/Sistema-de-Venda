@@ -5,7 +5,7 @@ import sales from '../controllers/sales/sales';
 import users from '../controllers/users/users';
 const router = Router();
 
-//user
+
 
 router.post('/createUser', users.createUser );
 
