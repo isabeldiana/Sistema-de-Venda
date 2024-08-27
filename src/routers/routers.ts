@@ -6,7 +6,7 @@ import users from '../controllers/users/users';
 const router = Router();
 
 
-
+//Users
 router.post('/createUser', users.createUser );
 
 //customers
@@ -29,7 +29,7 @@ router.put('/updateCustomer/:id', costumer.updateCustomer)
  router.get('/showSale', sales.showSale)
  router.get('/productBestSelling', sales.productBestSelling)
 
- //user 
+
 
 
 export default router;

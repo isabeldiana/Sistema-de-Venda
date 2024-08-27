@@ -31,6 +31,8 @@ const createUser = async (req: Request, res: Response) =>{
 
  } catch (error) {
   return res.status(500).json({ error: "Erro interno do servidor"})
+ 
+  
  }
 }
 
