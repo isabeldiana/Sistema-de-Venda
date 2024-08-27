@@ -1,7 +1,7 @@
 require('dotenv').config();
 import express from 'express';
 import cors from 'cors';
-import router from './routers/routers';
+import router from './routes/routes';
 import { setupSwagger } from './swagger/swagger';
 
 const app = express();

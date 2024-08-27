@@ -12,10 +12,20 @@ const options = {
     },
     tags: [
       { name: 'Users', description: 'Operations related to  users' },
+      { name: 'Auth', description: 'Login User' },
       { name: 'Customers', description: 'Operations related to customers' },
       { name: 'Products', description: 'Operations related to products' },
       { name: 'Sales', description: 'Operations related to Sales' },
     ],
+    components:{
+      securitySchemes:{
+        BearerAuth:{
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        }
+      }
+    }
   },
   apis: ['./src/swagger/swagger.docs.ts'], 
 };

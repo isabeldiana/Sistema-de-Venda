@@ -45,6 +45,71 @@
  *         description: Internal server error
  */
 
+/**
+ * @swagger
+ * /api/login:
+ *   post:
+ *     summary: Log in and receive a JWT token
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 example: john.doe@example.com
+ *               password:
+ *                 type: string
+ *                 format: password
+ *                 example: secretpassword
+ *     responses:
+ *       200:
+ *         description: Successful login, returns JWT token
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
+ *                   example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+ *       400:
+ *         description: Bad request, missing or invalid fields
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Email e senha são obrigatórios"
+ *       401:
+ *         description: Unauthorized, invalid credentials
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Invalid credentials"
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   example: "Internal server error"
+ */
+
+
 //Customers
 
 /**
@@ -53,6 +118,8 @@
  *   post:
  *     summary: Create a new customer
  *     tags: [Customers]
+ *     security:
+ *       - BearerAuth: [] 
  *     requestBody:
  *       required: true
  *       content:
@@ -132,6 +199,8 @@
  *   get:
  *     summary: Display a customer by ID
  *     tags: [Customers]
+ *     security:
+ *       - BearerAuth: [] 
  *     parameters:
  *       - in: path
  *         name: id
@@ -189,6 +258,8 @@
  *   get:
  *     summary: Display all customers
  *     tags: [Customers]
+ *     security:
+ *       - BearerAuth: [] 
  *     responses:
  *       200:
  *         description: Successfully display all customers
@@ -238,6 +309,8 @@
  *   put:
  *     summary: Update a customer by ID
  *     tags: [Customers]
+ *     security:
+ *       - BearerAuth: [] 
  *     parameters:
  *       - in: path
  *         name: id
@@ -324,6 +397,8 @@
  *   post:
  *     summary: Create a new product
  *     tags: [Products]
+  *     security:
+ *       - BearerAuth: [] 
  *     requestBody:
  *       required: true
  *       content:
@@ -387,6 +462,8 @@
  *   put:
  *     summary: Update a product by ID
  *     tags: [Products]
+  *     security:
+ *       - BearerAuth: [] 
  *     parameters:
  *       - in: path
  *         name: id
@@ -450,6 +527,8 @@
  *   put:
  *     summary: Update a product stock by ID
  *     tags: [Products]
+  *     security:
+ *       - BearerAuth: [] 
  *     parameters:
  *       - in: path
  *         name: id
@@ -500,6 +579,8 @@
  *   get:
  *     summary: Retrieve all products in stock
  *     tags: [Products]
+  *     security:
+ *       - BearerAuth: [] 
  *     responses:
  *       200:
  *         description: Successfully retrieved all products
@@ -548,6 +629,8 @@
  *   post:
  *     summary: Create a new sale
  *     tags: [Sales]
+  *     security:
+ *       - BearerAuth: [] 
  *     requestBody:
  *       required: true
  *       content:
@@ -618,6 +701,8 @@
  *   get:
  *     summary: Retrieve all sales
  *     tags: [Sales]
+  *     security:
+ *       - BearerAuth: [] 
  *     responses:
  *       200:
  *         description: Successfully retrieved all sales
@@ -660,6 +745,8 @@
  *   get:
  *     summary: Retrieve sales by customer ID
  *     tags: [Sales]
+  *     security:
+ *       - BearerAuth: [] 
  *     parameters:
  *       - in: path
  *         name: customerId
@@ -711,6 +798,8 @@
  *   get:
  *     summary: Retrieve the best-selling products
  *     tags: [Products]
+  *     security:
+ *       - BearerAuth: [] 
  *     responses:
  *       200:
  *         description: Successfully retrieved the best-selling products

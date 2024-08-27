@@ -30,7 +30,7 @@ const createUser = async (req: Request, res: Response) =>{
   return res.status(201).json(newUser)
 
  } catch (error) {
-  return res.status(500).json({ error: "Erro interno do servidor"})
+  return res.status(500).json({ error: "Internal server error"})
  
   
  }
